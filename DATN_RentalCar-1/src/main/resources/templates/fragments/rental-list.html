@@ -1,0 +1,53 @@
+<div th:fragment="rentalList" class="rental-list-container" style="margin-bottom: 20px">
+    <h2 class="rental-list-title">Danh sách thuê</h2>
+
+    <!-- Tabs cho Xe Ô Tô và Xe Máy -->
+    <ul class="rental-nav-tabs" id="rentalTab" role="tablist">
+        <li class="rental-nav-item">
+            <a class="rental-nav-link active" id="car-tab" data-bs-toggle="tab" href="#car-rentals" role="tab" aria-controls="car-rentals" aria-selected="true">Xe Ô Tô</a>
+        </li>
+        <li class="rental-nav-item">
+            <a class="rental-nav-link" id="motorbike-tab" data-bs-toggle="tab" href="#motorbike-rentals" role="tab" aria-controls="motorbike-rentals" aria-selected="false">Xe Máy</a>
+        </li>
+    </ul>
+
+    <div class="rental-tab-content">
+        <!-- Danh sách xe ô tô -->
+        <div class="rental-tab-pane active" id="car-rentals" role="tabpanel" aria-labelledby="car-tab">
+        
+            <table class="rental-table">
+                <thead>
+                    <tr>
+                        <th class="rental-table-header">Tên xe</th>
+                        <th class="rental-table-header">Ngày thuê</th>
+                        <th class="rental-table-header">Ngày trả</th>
+                        <th class="rental-table-header">Trạng thái</th>
+                        <th class="rental-table-header">Hành động</th> <!-- Cột Hành động -->
+                    </tr>
+                </thead>
+                <tbody id="car-rentals-body">
+                    <!-- Dữ liệu xe ô tô sẽ được chèn vào đây bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Danh sách xe máy -->
+        <div class="rental-tab-pane" id="motorbike-rentals" role="tabpanel" aria-labelledby="motorbike-tab">
+            
+            <table class="rental-table">
+                <thead>
+                    <tr>
+                        <th class="rental-table-header">Tên xe</th>
+                        <th class="rental-table-header">Ngày thuê</th>
+                        <th class="rental-table-header">Ngày trả</th>
+                        <th class="rental-table-header">Trạng thái</th>
+                        <th class="rental-table-header">Hành động</th> <!-- Cột Hành động -->
+                    </tr>
+                </thead>
+                <tbody id="motorbike-rentals-body">
+                    <!-- Dữ liệu xe máy sẽ được chèn vào đây bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="./assets/css/base.css" />
+<link rel="stylesheet" href="./assets/css/utils.css" />
+<link rel="stylesheet" href="./assets/css/style.css" />
+<link rel="stylesheet" href="./assets/css/responsive.css" />
+<link rel="stylesheet" href="./assets/css/Search-option.css">
+<link rel="stylesheet" href="./assets/css/rental-form.css">
+
+<!-- Search-option-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<title>TRANG CHỦ RENTALCAR</title>
+<style >
+	.product-item {
+	position: relative;
+	transition: transform 0.3s ease;
+	}
+	
+	.product-item:hover {
+		transform: scale(1.05); /* Slight zoom effect */
+		box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adding shadow on hover */
+	}
+	
+	.product-link {
+		text-decoration: none;
+		color: inherit;
+		display: block; /* Make the whole div clickable */
+	}
+	
+</style>
+</head>
+
+<body>
+	<!-- header -->
+	<header th:replace="~{module/header :: header}">
+		
+	</header>
+
+	<!-- banner -->
+	<section id="banner-section">
+		<div class="container">
+			<div class="banner-layout">
+				<!--  -->
+				<h1>
+					RENTALCAR <span class="no-wrap"> <br>Cùng Bạn Đến Mọi
+						Hành Trình
+					</span>
+				</h1>
+				<!-- <h1>RENTALCAR&nbsp;<br>Cùng&nbsp;Bạn Đến Mọi Hành&nbsp;Trình</h1> -->
+				<div class="line"></div>
+				<h6 class="text-white">
+					Trải nghiệm sự khác biệt từ <span class="text-primary">hơn
+						8000</span> xe gia&nbsp;đình đời&nbsp;mới khắp Việt&nbsp;Nam
+				</h6>
+				<!--  -->
+			</div>
+			<!--  -->
+			<div class="search-option-index bg_xam container">
+				<style>
+::placeholder {
+	color: #e2e2e2;
+}
+</style>
+
+								       <div th:replace="~{module/search :: search}" class="rental-form">
+
+          </div>
+                <!--------------------------------------------------------------------------->
+			</div>
+		</div>
+	</section>
+
+	<!-- sale -->
+	<section id="sale">
+		<div th:replace="~{module/sale :: sale}" class="container">
+			
+		</div>
+	</section>
+
+	<!-- product -->
+	<!-- Car Section -->
+	<section id="product-car">
+    	<div th:replace="~{module/product-car :: product-car}" class="container">
+    
+    	</div>
+	</section>
+
+	<!-- Motobike ----------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<section id="product-motobike">
+		<div th:replace="~{module/product-motobike :: product-motobike}" class="container">
+    
+    	</div>
+	</section>
+
+	<!-- address -->
+	<section id="address-hot">
+		<div th:replace="~{module/address-hot :: address-hot}" class="container">
+			
+		</div>
+	</section>
+<!-- Chi nhánh có xe  -->
+		<!-- topdes -->
+		<section id="topdes">
+			<div th:replace="~{module/topdes :: topdes}" class="container">
+
+			</div>
+		</section>
+<!-- Chi nhánh có xe  -->
+	<!-- features -->
+	<section id="features">
+		<div class="container">
+			<div class="features-layout">
+				<h2 class="title-big">Ưu Điểm Của&nbsp;RENTALCAR</h2>
+				<p class="features-desc">Những tính năng giúp bạn làm quen với
+					các bước thuê xe.</p>
+				<div class="feature-container">
+					<div class="feature-item feature-pointer">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/laixeantoan.png"
+								alt="thue_xe_co_tai_xe" />
+						</div>
+						<h5 class="feature-title">Lái xe an toàn cùng RENTALCAR</h5>
+						<p class="feature-description">
+							Chuyến đi trên RENTALCAR được bảo vệ với Gói bảo hiểm thuê xe tự
+							lái từ MIC &amp; VNI.<br />Khách thuê sẽ chỉ bồi thường tối đa
+							2,000,000VNĐ trong trường hợp có sự cố ngoài ý muốn.
+						</p>
+					</div>
+					<div class="feature-item">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/antamdacxe.png"
+								alt="dich_vu_thue_xe_tu_lai_hanoi" />
+						</div>
+						<h5 class="feature-title">An tâm đặt xe</h5>
+						<p class="feature-description">Không tính phí huỷ chuyến trong
+							vòng 1h sau khi đặt cọc. Hoàn cọc và bồi thường 100% nếu chủ xe
+							huỷ chuyến trong vòng 7 ngày trước chuyến đi.</p>
+					</div>
+					<div class="feature-item">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/thutucdongian.png" />
+						</div>
+						<h5 class="feature-title">Thủ tục đơn giản</h5>
+						<p class="feature-description">Chỉ cần có CCCD gắn chip (Hoặc
+							Passport) &amp; Giấy phép lái xe là bạn đã đủ điều kiện thuê xe
+							trên RENTALCAR</p>
+					</div>
+					<div class="feature-item">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/thanhtoandedang.png"
+								alt="cho_thue_xe_tu_lai_hanoi" />
+						</div>
+						<h5 class="feature-title">Thanh toán dễ dàng</h5>
+						<p class="feature-description">Đa dạng hình thức thanh toán:
+							ATM, thẻ Visa &amp; Ví điện tử (Momo, VnPay, ZaloPay).</p>
+					</div>
+					<div class="feature-item">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/giaoxetannoi.png" />
+						</div>
+						<h5 class="feature-title">Giao xe tận nơi</h5>
+						<p class="feature-description">Bạn có thể lựa chọn giao xe tận
+							nhà/sân bay... Phí tiết kiệm chỉ từ 15k/km.</p>
+					</div>
+					<div class="feature-item">
+						<div class="feature-img-container">
+							<img loading="lazy"
+								src="./assets/images/others/dongxedadang.png"
+								alt="thue_xe_tu_lai_gia_re_hanoi" />
+						</div>
+						<h5 class="feature-title">Dòng xe đa dạng</h5>
+						<p class="feature-description">Hơn 100 dòng xe cho bạn tuỳ ý
+							lựa chọn: Mini, Sedan, CUV, SUV, MPV, Bán tải.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- partner -->
+	<section id="partner-section">
+		<div class="container">
+			<div class="partner-container">
+				<h2 class="title-big">Hành Trình Của Bạn Luôn Được Bảo Vệ Bởi
+					Chúng Tôi</h2>
+			</div>
+			<div class="partner-container">
+				<div class="partner-swiper">
+					<div class="partner-swiper-wrapper">
+						<div class="partner-swiper-slide">
+							<img loading="lazy" src="./assets/images/others/Bh_global.jpg" />
+						</div>
+						<div class="partner-swiper-slide">
+							<img loading="lazy" src="./assets/images/others/Bh_PVI.jpg" />
+						</div>
+						<div class="partner-swiper-slide">
+							<img loading="lazy" src="./assets/images/others/Bh_VNI.jpg" />
+						</div>
+						<div class="partner-swiper-slide">
+							<img loading="lazy" src="./assets/images/others/Bh_mic.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- service -->
+	<section id="service">
+		<div class="container">
+			<div class="service-layout">
+				<h2 class="service-title title-big">Dịch Vụ Của RENTALCAR</h2>
+				<div class="service-list">
+					<div class="service-item">
+						<div class="service-img">
+							<img src="./assets/images/others/gia_cam_vo_lang.png" alt="" />
+							<div class="service-content">
+								<h3>
+									Xe đã sẵn sàng. <br /> Bắt đầu hành trình ngay!
+								</h3>
+								<p>
+									Tự tay cầm lái chiếc xe bạn yêu thích <br /> cho hành trình
+									thêm hứng khởi.
+								</p>
+								<button>Thuê xe tự lái</button>
+							</div>
+						</div>
+					</div>
+					<div class="service-item right">
+						<div class="service-img">
+							<img src="./assets/images/others/Xexinh.png" alt="" />
+							<div class="service-content">
+								<h3>Tài xế của bạn đã đến!</h3>
+								<p>
+									Chuyến đi thêm thú vị <br /> cùng các bác tài 5* trên
+									RENTALCAR.
+								</p>
+								<button>Thuê xe có tài xế</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- tutorial -->
+	<section id="tutorial-section ">
+		<div class="container">
+			<div class="tutorial-container">
+				<h2 class="title-big">Hướng Dẫn Thuê Xe</h2>
+				<h5>Chỉ với 4 bước đơn giản để trải nghiệm thuê xe RENTALCAR
+					một cách nhanh chóng</h5>
+				<div class="tutorial-steps">
+					<div class="tutorial-step">
+						<div class="tutorial-img">
+							<img loading="lazy"
+								src="./assets/images/others/01.png"
+								alt="cho_thue_xe_co_taigia_re_tphcm" />
+						</div>
+						<div class="tutorial-content">
+							<h5 class="tit">01</h5>
+							<h5>
+								Đặt xe trên<br />app/web RENTALCAR
+							</h5>
+						</div>
+					</div>
+					<div class="tutorial-step">
+						<div class="tutorial-img">
+							<img loading="lazy"
+								src="./assets/images/others/02.png"
+								alt="gia_thue_xe_7cho_tai_tphcm" />
+						</div>
+						<div class="tutorial-content">
+							<h5 class="tit">02</h5>
+							<h5>Nhận xe</h5>
+						</div>
+					</div>
+					<div class="tutorial-step">
+						<div class="tutorial-img">
+							<img loading="lazy"
+								src="./assets/images/others/03.png"
+								alt="gia_thue_xe_7cho_tai_hanoi" />
+						</div>
+						<div class="tutorial-content">
+							<h5 class="tit">03</h5>
+							<h5>
+								Bắt đầu<br />hành trình
+							</h5>
+						</div>
+					</div>
+					<div class="tutorial-step">
+						<div class="tutorial-img">
+							<img loading="lazy"
+								src="./assets/images/others/04.png"
+								alt="gia_thue_xe_4cho_tai_tphcm" />
+						</div>
+						<div class="tutorial-content">
+							<h5 class="tit">04</h5>
+							<h5>
+								Trả xe &amp; kết thúc<br />chuyến đi
+							</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- explorer-->
+	<div class="explorer-section second">
+		<div class="container">
+			<div class="explorer-container">
+				<div class="explorer-item">
+					<div class="explorer-content">
+						<div class="icon-svg">
+							<svg width="65" height="65" viewBox="0 0 65 65" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+                <path
+									d="M39.2979 5.66406H25.6979C20.8979 5.66406 19.8313 8.06409 19.2179 11.0241L17.0312 21.4774H47.9645L45.7779 11.0241C45.1645 8.06409 44.0979 5.66406 39.2979 5.66406Z"
+									stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+									stroke-linejoin="round"></path>
+                <path
+									d="M51.8031 38.5218C52.0164 40.7885 50.2031 42.7351 47.8831 42.7351H44.2564C42.1764 42.7351 41.8831 41.8551 41.5098 40.7351L41.1098 39.5885C40.5764 38.0151 40.2298 36.9485 37.4298 36.9485H27.5364C24.7631 36.9485 24.3364 38.1485 23.8564 39.5885L23.4564 40.7351C23.0831 41.8285 22.7897 42.7351 20.7097 42.7351H17.0831C14.7631 42.7351 12.9497 40.7885 13.1631 38.5218L14.2564 26.7352C14.5231 23.8285 15.083 21.4551 20.1497 21.4551H44.8164C49.8831 21.4551 50.4431 23.8285 50.7098 26.7352L51.8031 38.5218Z"
+									stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+									stroke-linejoin="round"></path>
+                <path d="M17.0302 15.6641H15.0835" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M49.9052 15.6641H47.9585" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M20.896 29.2051H26.6827" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M38.3125 29.2051H44.0992" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M32.5 45.6641V48.3307" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M32.5 56.3301V58.9967" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M8.50016 48.3301L5.8335 58.9967"
+									stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+									stroke-linejoin="round"></path>
+                <path d="M56.5 48.3301L59.1667 58.9967" stroke="#5CB3FF"
+									stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+						</div>
+						<h2 class="title-big">
+							Bạn muốn cho <br />thuê xe?
+						</h2>
+						<p>
+							Hơn 5,000 chủ xe đang cho thuê hiệu quả trên RENTALCAR<br />Đăng
+							ký trở thành đối tác của chúng tôi ngay hôm nay để gia tăng thu
+							nhập hàng tháng.
+						</p>
+						<div class="btn-container">
+							<a class="btn-default" href="/howitwork#owner">Tìm hiểu ngay</a>
+							<a class="btn-blue" href="/owner/register">Đăng ký xe</a>
+						</div>
+					</div>
+					<div class="explorer-img">
+						<img
+							src="./assets/images/others/thue_xe_oto_tu_lai_di_du_lich_gia_re.fde3ac82.png"
+							alt="thueoto_tu_lai_di_du_lich_gia_re" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- blog -->
+	<div id="blog-section">
+		<div class="container">
+			<div class="blog-container">
+				<h2 class="title-big">RENTALCAR</h2>
+				<div class="blog-items">
+					<div class="blog-wrap-2-item">
+						<a class="blog-item" href="#">
+							<div class="blog-img">
+								<img loading="lazy" src="./assets/images/others/audi.jpg"
+									alt="RENTALCAR - Thuê xe tự lái" />
+							</div>
+							<div class="blog-content">
+								<p class="time-text">24-05-2024</p>
+								<p class="name-text">Thuê xe ô tô tự lái du lịch mùa hè: Tự
+									do khám phá và trải nghiệm thú vị</p>
+							</div>
+						</a> <a class="blog-item" href="#">
+							<div class="blog-img">
+								<img loading="lazy" src="./assets/images/others/bmwi.jpg"
+									alt="RENTALCAR - Thuê xe tự lái" />
+							</div>
+							<div class="blog-content">
+								<p class="time-text">29-02-2024</p>
+								<p class="name-text">Thuê xe ô tô tự lái: Du lịch sau lễ
+									thảnh thơi đi muôn nơi</p>
+							</div>
+						</a>
+					</div>
+					<div class="blog-wrap">
+						<a class="blog-item" href="#">
+							<div class="blog-img">
+								<img loading="lazy" src="./assets/images/others/civic-altis4-2024.jpg"
+									alt="RENTALCAR - Thuê xe tự lái" />
+							</div>
+							<div class="blog-content">
+								<p class="time-text">24-01-2024</p>
+								<p class="name-text">Thuê xe ô tô tự lái: An tâm đưa gia
+									đình đi muôn nơi dịp Tết Nguyên Đán</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper blog-slider blog-mobile">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="blog-mobile">
+							<img src="./assets/images/others/civic-altis4-2024.jpg" alt="" />
+							<div class="content">
+								<p class="time-text">22-12-2023</p>
+								<p class="name-text">Thuê xe ô tô tự lái: Tự do trải nghiệm
+									lễ Giáng sinh đáng nhớ</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="blog-mobile">
+							<img src="./assets/images/others/civic-altis4-2024.jpg" alt="" />
+							<div class="content">
+								<p class="time-text">22-12-2023</p>
+								<p class="name-text">Thuê xe ô tô tự lái: Tự do trải nghiệm
+									lễ Giáng sinh đáng nhớ</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="blog-mobile">
+							<img src="./assets/images/others/civic-altis4-2024.jpg" alt="" />
+							<div class="content">
+								<p class="time-text">22-12-2023</p>
+								<p class="name-text">Thuê xe ô tô tự lái: Tự do trải nghiệm
+									lễ Giáng sinh đáng nhớ</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer -->
+	<div class="footer">
+		<div th:replace="~{module/footer :: footer }"  class="container">
+			
+		</div>
+	</div>
+
+	<!--Search-option-->
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/i18n/jquery-ui-i18n.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+	<script src="./assets/js/Search-option.js"></script>
+	<!-- Ion-Icon -->
+	<script type="module"
+		src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule
+		src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<!-- Swiper JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<script src="./assets/js/swiper.js"></script>
+	<script src="./assets/js/rental-form.js"></script>
+	<script src="./assets/js/search.js"></script>
+
+	<!-- Bootstrap JS và các phụ thuộc -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

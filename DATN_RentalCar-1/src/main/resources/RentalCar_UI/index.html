@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/utils.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/responsive.css" />
+  <link rel="stylesheet" href="./assets/css/rental-form.css">
+
+ <!-- Search-option--> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>TRANG CHỦ RENTALCAR</title>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+    <div class="container">
+      <div class="header-layout">
+        <a href="index.html" id="logo">
+          <img src="./assets/images/Logo.png" alt="" />
+        </a> 
+        <ul class="menu-list">
+          <li><a href="about.html">Giới Thiệu</a></li>
+          <li><a href="#!">Hổ Trợ</a></li>
+          <li><a href="#!">Khuyến Mãi</a></li>
+          <div class="menu-line"></div>
+          <li><a href="rigister.html" class="register-link">Đăng ký</a></li>
+          <li><a href="Login.html" class="border">Đăng nhập</a></li>
+        </ul>
+        <div class="menu-mobile">
+          <div class="wrap-svg tab-menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 6H19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5 18H19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M5 12H19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- banner -->
+  <section id="banner-section">
+    <div class="container">
+      <div class="banner-layout">
+        <!--  -->
+        <h1>RENTALCAR <span class="no-wrap"> <br>Cùng Bạn Đến Mọi Hành Trình</span></h1>
+        <!-- <h1>RENTALCAR&nbsp;<br>Cùng&nbsp;Bạn Đến Mọi Hành&nbsp;Trình</h1> -->
+        <div class="line"></div>
+        <h6 class="text-white">
+          Trải nghiệm sự khác biệt từ
+          <span class="text-primary">hơn 8000</span> xe gia&nbsp;đình
+          đời&nbsp;mới khắp Việt&nbsp;Nam
+        </h6>
+        <!--  -->
+      </div>
+      <!--  -->
+      <div class="search-option-index bg_xam container">
+        <style>
+          ::placeholder {
+            color: #e2e2e2;
+          }
+        </style>
+            <!-- ------------------------------------------------------------------------------ -->
+            <div th:fragment="search" class="rental-container">
+              <!-- Form bao quanh -->
+              <form action="/search" method="get" id="search-form">
+                  <!-- Form 1: Tiêu đề và buttons -->
+                  <div class="rental-form">
+                      <div class="form-group">
+                          <div class="vehicle-type">
+                              <button class="btn btn-select active" type="button" data-type="car" onclick="setVehicleType('car')">
+                                  Ô tô <i class="fas fa-check"></i>
+                              </button>
+                              <button class="btn btn-select" type="button" data-type="bike" onclick="setVehicleType('bike')">
+                                  Xe máy <i class="fas fa-check"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+          
+                  <!-- Hidden input để lưu loại phương tiện -->
+                  <input type="hidden" name="vehicleType" id="vehicleType" value="car">
+          
+                  <!-- Form 2: Thông tin tìm kiếm -->
+                  <div class="rental-form-search">
+                      <div class="form-row">
+                          <div class="form-group">
+                              <label for="location">Địa Điểm</label>
+                              <select id="location" name="location">
+                                  <option value="Ho Chi Minh">Ho Chi Minh</option>
+                                  <option value="Hà Nội">Hà Nội</option>
+                                  <option value="Đà Nẵng">Đà Nẵng</option>
+                              </select>
+                          </div>
+                          <div class="form-group date-input">
+                              <label for="pickup-date">Ngày nhận xe</label>
+                              <input type="datetime-local" id="pickup-date" name="pickupDate" value="2024-11-21T07:00">
+                          </div>
+                          <div class="form-group date-input">
+                              <label for="return-date">Ngày trả xe</label>
+                              <input type="datetime-local" id="return-date" name="returnDate" value="2024-11-21T19:00">
+                          </div>
+                          <div class="form-group btn-group">
+                              <button class="btn btn-primary" type="submit">Tìm xe</button>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          
+          
+          
+            
+            <!-- ------------------------------------------------------------------------------ -->
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- sale -->
+  <section id="sale">
+    <div class="container">
+      <div class="sale-layout">
+        <h2 class="title-big">Chương Trình Khuyến Mãi</h2>
+        <h5>Nhận nhiều ưu đãi hấp dẫn từ RENTALCAR</h5>
+        <div class="swiper img-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/thoaimai.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/TanHuong.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/XeHienDai.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/uudai.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/xe7cho.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="./assets/images/datxe.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-poster">
+                <img src="https://n1-cstg.mioto.vn/g/2024/06/08/08/6NH5V581.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- product -->
+  <section id="prodcut">
+    <div class="container">
+      <div class="product-layout">
+        <h2 class="title-big">Xe Ô Tô Dành Cho Bạn</h2>
+        <div class="product-list">
+          <div class="product-item">
+            <a href="car-details.html">
+              <div class="product-img">
+                <img
+                  src="https://n1-pstg.mioto.vn/cho_thue_xe_o_to_tu_lai_thue_xe_du_lich_lamdong/ford_ranger_wildtrak_4x4_2016/p/g/2022/10/07/16/jNUdrhL_rKY9dExyv8bWpA.jpg"
+                  alt="" />
+                <div class="product-discount">Giảm 9%</div>
+                <div class="product-rents">
+                  <span class="product-rent">Miễn thế chấp
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M2.06654 3.41201L3.30916 4.68289C3.50222 4.88033 3.81878 4.88389 4.01622 4.69084C4.21367 4.49778 4.21723 4.18122 4.02417 3.98378L2.73171 2.66192C4.08658 1.32458 5.9467 0.5 7.99999 0.5C12.1421 0.5 15.5 3.8579 15.5 8.00004C15.5 10.0709 14.6612 11.9454 13.3035 13.3031L11.9871 11.9806C11.7923 11.7849 11.4757 11.7842 11.28 11.979C11.0843 12.1738 11.0836 12.4904 11.2784 12.6861L12.5495 13.9631C11.2875 14.9276 9.71111 15.5001 7.99999 15.5001C3.85785 15.5001 0.5 12.1422 0.5 8.00004C0.5 6.27151 1.08422 4.68039 2.06654 3.41201Z"
+                        stroke="#5FCF86" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path
+                        d="M10.3364 5.92398H10.1909C10.0678 5.21142 9.48584 4.66675 8.78821 4.66675H5.12098C4.65092 4.66675 4.26666 5.07712 4.26666 5.57703C4.26666 5.6106 4.27412 5.64045 4.27785 5.67402C4.27412 5.68895 4.26666 5.70387 4.26666 5.72252V9.93815C4.26666 10.7067 4.89341 11.3334 5.65819 11.3334H10.3364C11.1012 11.3334 11.728 10.7067 11.728 9.93815V7.31551C11.728 6.547 11.1012 5.92398 10.3364 5.92398ZM10.1275 9.09876C9.87009 9.09876 9.65745 8.88984 9.65745 8.6287C9.65745 8.36755 9.87009 8.1549 10.1275 8.1549C10.3887 8.1549 10.6013 8.36755 10.6013 8.6287C10.6013 8.88984 10.3887 9.09876 10.1275 9.09876ZM5.12098 5.22635H8.78821C9.17992 5.22635 9.50822 5.52107 9.61641 5.92398H5.12098C4.95683 5.92398 4.82626 5.76729 4.82626 5.57703C4.82626 5.38303 4.95683 5.22635 5.12098 5.22635Z"
+                        fill="#5FCF86"></path>
+                    </svg>
+                    ></span>
+                </div>
+              </div>
+              <div class="product-tags">
+                <div class="product-tag">Số sàn</div>
+                <div class="product-tag">Giao xe tận nơi</div>
+              </div>
+              <div class="product-title">TOYOTA INNOVA 2019</div>
+              <div class="product-location">
+                <div class="wrap-svg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path
+                      d="M7.99999 1.83331C5.25999 1.83331 3.03333 4.05998 3.03333 6.79998C3.03333 10.06 7.15333 14.6733 7.32666 14.8666C7.49999 15.06 7.74666 15.1666 7.99999 15.1666C8.25332 15.1666 8.49999 15.06 8.67332 14.8666C9.11332 14.38 12.9667 9.98664 12.9667 6.79998C12.9667 4.05998 10.74 1.83331 7.99999 1.83331ZM7.99999 14.12C7.45999 13.4933 4.03333 9.46664 4.03333 6.79998C4.03333 4.61331 5.81332 2.83331 7.99999 2.83331C10.1867 2.83331 11.9667 4.61331 11.9667 6.79998C11.9667 9.05331 9.41332 12.52 7.99999 14.12Z"
+                      fill="#101840"></path>
+                    <path
+                      d="M7.99999 1.83331C5.25999 1.83331 3.03333 4.05998 3.03333 6.79998C3.03333 10.06 7.15333 14.6733 7.32666 14.8666C7.49999 15.06 7.74666 15.1666 7.99999 15.1666C8.25332 15.1666 8.49999 15.06 8.67332 14.8666C9.11332 14.38 12.9667 9.98664 12.9667 6.79998C12.9667 4.05998 10.74 1.83331 7.99999 1.83331ZM5.91999 6.79998C5.91999 5.65331 6.85332 4.71998 7.99999 4.71998C9.14666 4.71998 10.08 5.65331 10.08 6.79998C10.08 7.94664 9.14666 8.87998 7.99999 8.87998C6.85332 8.87998 5.91999 7.94664 5.91999 6.79998Z"
+                      fill="#101840"></path>
+                  </svg>
+                </div>
+                Huyện Đức Trọng, Lâm Đồng
+              </div>
+              <div class="product-line"></div>
+              <div class="product-bottom">
+                <div class="product-ship">Chưa có chuyển</div>
+                <div class="product-price">
+                  <div class="old-price">1,722K</div>
+                  <div class="new-price">1,062K</div>
+                  <span>/</span>
+                  <p>ngày</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- fill-->
+        </div>
+      </div>
+    </div>
+  </section>
+    <section id="prodcut-motobike">
+      <div class="container">
+        <div class="product-layout">
+          <h2 class="title-big">Xe Máy Dành Cho Bạn</h2>
+          <div class="product-list">
+            <div class="product-item">
+              <div class="product-img">
+                <img
+                  src="./assets/images/motobike/Ex2015-1.jpg"
+                  alt="" />
+                <div class="product-discount">Giảm 9%</div>
+                <div class="product-rents">
+                  <span class="product-rent">Miễn thế chấp
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M2.06654 3.41201L3.30916 4.68289C3.50222 4.88033 3.81878 4.88389 4.01622 4.69084C4.21367 4.49778 4.21723 4.18122 4.02417 3.98378L2.73171 2.66192C4.08658 1.32458 5.9467 0.5 7.99999 0.5C12.1421 0.5 15.5 3.8579 15.5 8.00004C15.5 10.0709 14.6612 11.9454 13.3035 13.3031L11.9871 11.9806C11.7923 11.7849 11.4757 11.7842 11.28 11.979C11.0843 12.1738 11.0836 12.4904 11.2784 12.6861L12.5495 13.9631C11.2875 14.9276 9.71111 15.5001 7.99999 15.5001C3.85785 15.5001 0.5 12.1422 0.5 8.00004C0.5 6.27151 1.08422 4.68039 2.06654 3.41201Z"
+                        stroke="#5FCF86" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path
+                        d="M10.3364 5.92398H10.1909C10.0678 5.21142 9.48584 4.66675 8.78821 4.66675H5.12098C4.65092 4.66675 4.26666 5.07712 4.26666 5.57703C4.26666 5.6106 4.27412 5.64045 4.27785 5.67402C4.27412 5.68895 4.26666 5.70387 4.26666 5.72252V9.93815C4.26666 10.7067 4.89341 11.3334 5.65819 11.3334H10.3364C11.1012 11.3334 11.728 10.7067 11.728 9.93815V7.31551C11.728 6.547 11.1012 5.92398 10.3364 5.92398ZM10.1275 9.09876C9.87009 9.09876 9.65745 8.88984 9.65745 8.6287C9.65745 8.36755 9.87009 8.1549 10.1275 8.1549C10.3887 8.1549 10.6013 8.36755 10.6013 8.6287C10.6013 8.88984 10.3887 9.09876 10.1275 9.09876ZM5.12098 5.22635H8.78821C9.17992 5.22635 9.50822 5.52107 9.61641 5.92398H5.12098C4.95683 5.92398 4.82626 5.76729 4.82626 5.57703C4.82626 5.38303 4.95683 5.22635 5.12098 5.22635Z"
+                        fill="#5FCF86"></path>
+                    </svg>
+                    ></span>
+                </div>
+              </div>
+              <div class="product-tags">
+                <div class="product-tag"> Tay Côn</div>
+                <div class="product-tag">Giao xe tận nơi</div>
+              </div>
+              <div class="product-title">YAMAHA Exciter 2015</div>
+              <div class="product-location">
+                <div class="wrap-svg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path
+                      d="M7.99999 1.83331C5.25999 1.83331 3.03333 4.05998 3.03333 6.79998C3.03333 10.06 7.15333 14.6733 7.32666 14.8666C7.49999 15.06 7.74666 15.1666 7.99999 15.1666C8.25332 15.1666 8.49999 15.06 8.67332 14.8666C9.11332 14.38 12.9667 9.98664 12.9667 6.79998C12.9667 4.05998 10.74 1.83331 7.99999 1.83331ZM7.99999 14.12C7.45999 13.4933 4.03333 9.46664 4.03333 6.79998C4.03333 4.61331 5.81332 2.83331 7.99999 2.83331C10.1867 2.83331 11.9667 4.61331 11.9667 6.79998C11.9667 9.05331 9.41332 12.52 7.99999 14.12Z"
+                      fill="#101840"></path>
+                    <path
+                      d="M7.99999 1.83331C5.25999 1.83331 3.03333 4.05998 3.03333 6.79998C3.03333 10.06 7.15333 14.6733 7.32666 14.8666C7.49999 15.06 7.74666 15.1666 7.99999 15.1666C8.25332 15.1666 8.49999 15.06 8.67332 14.8666C9.11332 14.38 12.9667 9.98664 12.9667 6.79998C12.9667 4.05998 10.74 1.83331 7.99999 1.83331ZM5.91999 6.79998C5.91999 5.65331 6.85332 4.71998 7.99999 4.71998C9.14666 4.71998 10.08 5.65331 10.08 6.79998C10.08 7.94664 9.14666 8.87998 7.99999 8.87998C6.85332 8.87998 5.91999 7.94664 5.91999 6.79998Z"
+                      fill="#101840"></path>
+                  </svg>
+                </div>
+                Huyện Đức Trọng, Lâm Đồng
+              </div>
+              <div class="product-line"></div>
+              <div class="product-bottom">
+                <div class="product-ship">Chưa có chuyển</div>
+                <div class="product-price">
+                  <div class="old-price">1,722K</div>
+                  <div class="new-price">1,062K</div>
+                  <span>/</span>
+                  <p>ngày</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- address -->
+  <section id="address-hot">
+    <div class="container">
+      <div class="address-layout">
+        <h2 class="title-big">Địa Điểm Nổi Bật</h2>
+        <div class="swiper address-list">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>TP. Hồ Chí Minh <span> 3200+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/HoChiMinh_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Hà Nội <span> 1400+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/HaNoi_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Đà Nẵng <span> 320+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/DaNang_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Bình Dương <span> 330+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/BinhDuong_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Biên Hoà <span> 200+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/CanTho_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Đà Lạt <span> 160+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/1/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/BinhDuong_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Phú Quốc <span> 150+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/PhuQuoc_v2.jpg"
+                    alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="address-item">
+                <p>Đà Lạt <span> 160+ xe</span></p>
+                <div class="address-img">
+                  <img src="https://n1-cstg.mioto.vn/cho_thue_xe_tu_lai_tphcm/hcm/p/m/cities_v2/DaLat_v2.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- topdes -->
+  <section id="topdes">
+    <div class="container">
+      <div class="topdes-layout">
+        <div class="topdes-left">
+          <h3>Chi Nhánh <br>Hoạt Động</h3>
+          <div>
+            <div class="swiper-button-prev-topdes"></div>
+            <div class="swiper-button-next-topdes"></div>
+          </div>
+        </div>
+        <div class="swiper topdes-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/NGXIIKNY.jpg" alt="" />
+                </div>
+                <h4>Đà Nẵng</h4>
+                <p>320+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/HU5WFGGX.jpg" alt="" />
+                </div>
+                <h4>Tân Sơn Nhất</h4>
+                <p>200+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/ND4NE32Q.jpg" alt="" />
+                </div>
+                <h4>Đà Nẵng</h4>
+                <p>100+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/I2C3CQ64.jpg" alt="" />
+                </div>
+                <h4>Cam Ranh</h4>
+                <p>20+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/IH8BGVXP.jpg" alt="" />
+                </div>
+                <h4>Phú Quốc</h4>
+                <p>70+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/NGXIIKNY.jpg" alt="" />
+                </div>
+                <h4>Tân Sơn Nhất</h4>
+                <p>1000+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/IJKX9Q3Q.jpg" alt="" />
+                </div>
+                <h4>Liên Khương</h4>
+                <p>500+ xe</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="topdes-item">
+                <div class="topdes-img">
+                  <img src="https://n1-cstg.mioto.vn/g/2022/04/14/17/NGXIIKNY.jpg" alt="" />
+                </div>
+                <h4>Tân Sơn Nhất</h4>
+                <p>1000+ xe</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- features -->
+  <section id="features">
+    <div class="container">
+      <div class="features-layout">
+        <h2 class="title-big">Ưu Điểm Của&nbsp;RENTALCAR</h2>
+        <p class="features-desc">
+          Những tính năng giúp bạn làm quen với các bước thuê xe.
+        </p>
+        <div class="feature-container">
+          <div class="feature-item feature-pointer">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/laixeantoan.png"
+                alt="thue_xe_co_tai_xe" />
+            </div>
+            <h5 class="feature-title">Lái xe an toàn cùng RENTALCAR</h5>
+            <p class="feature-description">
+              Chuyến đi trên RENTALCAR được bảo vệ với Gói bảo hiểm thuê xe tự lái
+              từ MIC &amp; VNI.<br />Khách thuê sẽ chỉ bồi thường tối đa
+              2,000,000VNĐ trong trường hợp có sự cố ngoài ý muốn.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/antamdacxe.png"
+                alt="dich_vu_thue_xe_tu_lai_hanoi" />
+            </div>
+            <h5 class="feature-title">An tâm đặt xe</h5>
+            <p class="feature-description">
+              Không tính phí huỷ chuyến trong vòng 1h sau khi đặt cọc. Hoàn
+              cọc và bồi thường 100% nếu chủ xe huỷ chuyến trong vòng 7 ngày
+              trước chuyến đi.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/thutucdongian.png" />
+            </div>
+            <h5 class="feature-title">Thủ tục đơn giản</h5>
+            <p class="feature-description">
+              Chỉ cần có CCCD gắn chip (Hoặc Passport) &amp; Giấy phép lái xe
+              là bạn đã đủ điều kiện thuê xe trên RENTALCAR
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/thanhtoandedang.png"
+                alt="cho_thue_xe_tu_lai_hanoi" />
+            </div>
+            <h5 class="feature-title">Thanh toán dễ dàng</h5>
+            <p class="feature-description">
+              Đa dạng hình thức thanh toán: ATM, thẻ Visa &amp; Ví điện tử
+              (Momo, VnPay, ZaloPay).
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/giaoxetannoi.png" />
+            </div>
+            <h5 class="feature-title">Giao xe tận nơi</h5>
+            <p class="feature-description">
+              Bạn có thể lựa chọn giao xe tận nhà/sân bay... Phí tiết kiệm chỉ
+              từ 15k/km.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-img-container">
+              <img loading="lazy" src="./assets/images/dongxedadang.png"
+                alt="thue_xe_tu_lai_gia_re_hanoi" />
+            </div>
+            <h5 class="feature-title">Dòng xe đa dạng</h5>
+            <p class="feature-description">
+              Hơn 100 dòng xe cho bạn tuỳ ý lựa chọn: Mini, Sedan, CUV, SUV,
+              MPV, Bán tải.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- partner -->
+  <section id="partner-section">
+    <div class="container">
+      <div class="partner-container">
+        <h2 class="title-big">Hành Trình Của Bạn Luôn Được Bảo Vệ Bởi Chúng Tôi</h2>
+      </div>
+      <div class="partner-container">
+        <div class="partner-swiper">
+          <div class="partner-swiper-wrapper">
+            <div class="partner-swiper-slide">
+              <img loading="lazy" src="./assets/images/Bh_global.jpg" />
+            </div>
+            <div class="partner-swiper-slide">
+              <img loading="lazy" src="./assets/images/Bh_PVI.jpg" />
+            </div>
+            <div class="partner-swiper-slide">
+              <img loading="lazy" src="./assets/images/Bh_VNI.jpg" />
+            </div>
+            <div class="partner-swiper-slide">
+              <img loading="lazy" src="./assets/images/Bh_mic.jpg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- service -->
+  <section id="service">
+    <div class="container">
+      <div class="service-layout">
+        <h2 class="service-title title-big">Dịch Vụ Của RENTALCAR</h2>
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-img">
+              <img src="./assets/images/gia_cam_vo_lang.png" alt="" />
+              <div class="service-content">
+                <h3>
+                  Xe đã sẵn sàng. <br />
+                  Bắt đầu hành trình ngay!
+                </h3>
+                <p>
+                  Tự tay cầm lái chiếc xe bạn yêu thích <br />
+                  cho hành trình thêm hứng khởi.
+                </p>
+                <button>Thuê xe tự lái</button>
+              </div>
+            </div>
+          </div>
+          <div class="service-item right">
+            <div class="service-img">
+              <img src="./assets/images/Xexinh.png" alt="" />
+              <div class="service-content">
+                <h3>Tài xế của bạn đã đến!</h3>
+                <p>
+                  Chuyến đi thêm thú vị <br />
+                  cùng các bác tài 5* trên RENTALCAR.
+                </p>
+                <button>Thuê xe có tài xế</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tutorial -->
+  <section id="tutorial-section ">
+    <div class="container">
+      <div class="tutorial-container">
+        <h2 class="title-big">Hướng Dẫn Thuê Xe</h2>
+        <h5>
+          Chỉ với 4 bước đơn giản để trải nghiệm thuê xe RENTALCAR một cách nhanh
+          chóng
+        </h5>
+        <div class="tutorial-steps">
+          <div class="tutorial-step">
+            <div class="tutorial-img">
+              <img loading="lazy" src="./assets/images/01.png"
+                alt="cho_thue_xe_co_taigia_re_tphcm" />
+            </div>
+            <div class="tutorial-content">
+              <h5 class="tit">01</h5>
+              <h5>Đặt xe trên<br />app/web RENTALCAR</h5>
+            </div>
+          </div>
+          <div class="tutorial-step">
+            <div class="tutorial-img">
+              <img loading="lazy" src="./assets/images/02.png"
+                alt="gia_thue_xe_7cho_tai_tphcm" />
+            </div>
+            <div class="tutorial-content">
+              <h5 class="tit">02</h5>
+              <h5>Nhận xe</h5>
+            </div>
+          </div>
+          <div class="tutorial-step">
+            <div class="tutorial-img">
+              <img loading="lazy" src="./assets/images/03.png"
+                alt="gia_thue_xe_7cho_tai_hanoi" />
+            </div>
+            <div class="tutorial-content">
+              <h5 class="tit">03</h5>
+              <h5>Bắt đầu<br />hành trình</h5>
+            </div>
+          </div>
+          <div class="tutorial-step">
+            <div class="tutorial-img">
+              <img loading="lazy" src="./assets/images/04.png"
+                alt="gia_thue_xe_4cho_tai_tphcm" />
+            </div>
+            <div class="tutorial-content">
+              <h5 class="tit">04</h5>
+              <h5>Trả xe &amp; kết thúc<br />chuyến đi</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- explorer-->
+  <div class="explorer-section second">
+    <div class="container">
+      <div class="explorer-container">
+        <div class="explorer-item">
+          <div class="explorer-content">
+            <div class="icon-svg">
+              <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M39.2979 5.66406H25.6979C20.8979 5.66406 19.8313 8.06409 19.2179 11.0241L17.0312 21.4774H47.9645L45.7779 11.0241C45.1645 8.06409 44.0979 5.66406 39.2979 5.66406Z"
+                  stroke="#5CB3FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path
+                  d="M51.8031 38.5218C52.0164 40.7885 50.2031 42.7351 47.8831 42.7351H44.2564C42.1764 42.7351 41.8831 41.8551 41.5098 40.7351L41.1098 39.5885C40.5764 38.0151 40.2298 36.9485 37.4298 36.9485H27.5364C24.7631 36.9485 24.3364 38.1485 23.8564 39.5885L23.4564 40.7351C23.0831 41.8285 22.7897 42.7351 20.7097 42.7351H17.0831C14.7631 42.7351 12.9497 40.7885 13.1631 38.5218L14.2564 26.7352C14.5231 23.8285 15.083 21.4551 20.1497 21.4551H44.8164C49.8831 21.4551 50.4431 23.8285 50.7098 26.7352L51.8031 38.5218Z"
+                  stroke="#5CB3FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M17.0302 15.6641H15.0835" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M49.9052 15.6641H47.9585" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M20.896 29.2051H26.6827" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M38.3125 29.2051H44.0992" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M32.5 45.6641V48.3307" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M32.5 56.3301V58.9967" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M8.50016 48.3301L5.8335 58.9967" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M56.5 48.3301L59.1667 58.9967" stroke="#5CB3FF" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <h2 class="title-big">Bạn muốn cho <br />thuê xe?</h2>
+            <p>
+              Hơn 5,000 chủ xe đang cho thuê hiệu quả trên RENTALCAR<br />Đăng ký
+              trở thành đối tác của chúng tôi ngay hôm nay để gia tăng thu
+              nhập hàng tháng.
+            </p>
+            <div class="btn-container">
+              <a class="btn-default" href="/howitwork#owner">Tìm hiểu ngay</a>
+              <a class="btn-blue" href="/owner/register">Đăng ký xe</a>
+            </div>
+          </div>
+          <div class="explorer-img">
+            <img src="./assets/images/thue_xe_oto_tu_lai_di_du_lich_gia_re.fde3ac82.png"
+              alt="thueoto_tu_lai_di_du_lich_gia_re" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- blog -->
+  <div id="blog-section">
+    <div class="container">
+      <div class="blog-container">
+        <h2 class="title-big">RENTALCAR</h2>
+        <div class="blog-items">
+          <div class="blog-wrap-2-item">
+            <a class="blog-item"
+              href="#">
+              <div class="blog-img">
+                <img loading="lazy" src="./assets/images/audi.jpg"
+                  alt="RENTALCAR - Thuê xe tự lái" />
+              </div>
+              <div class="blog-content">
+                <p class="time-text">24-05-2024</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái du lịch mùa hè: Tự do khám phá và trải
+                  nghiệm thú vị
+                </p>
+              </div>
+            </a>
+            <a class="blog-item" href="#">
+              <div class="blog-img">
+                <img loading="lazy" src="./assets/images/bmwi.jpg"
+                  alt="RENTALCAR - Thuê xe tự lái" />
+              </div>
+              <div class="blog-content">
+                <p class="time-text">29-02-2024</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái: Du lịch sau lễ thảnh thơi đi muôn nơi
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="blog-wrap">
+            <a class="blog-item"
+              href="#">
+              <div class="blog-img">
+                <img loading="lazy" src="./assets/images/civic-altis4-2024.jpg"
+                  alt="RENTALCAR - Thuê xe tự lái" />
+              </div>
+              <div class="blog-content">
+                <p class="time-text">24-01-2024</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái: An tâm đưa gia đình đi muôn nơi dịp Tết
+                  Nguyên Đán
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper blog-slider blog-mobile">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="blog-mobile">
+              <img src="./assets/images/civic-altis4-2024.jpg" alt="" />
+              <div class="content">
+                <p class="time-text">22-12-2023</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái: Tự do trải nghiệm lễ Giáng sinh đáng
+                  nhớ
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="blog-mobile">
+              <img src="./assets/images/civic-altis4-2024.jpg" alt="" />
+              <div class="content">
+                <p class="time-text">22-12-2023</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái: Tự do trải nghiệm lễ Giáng sinh đáng
+                  nhớ
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="blog-mobile">
+              <img src="./assets/images/civic-altis4-2024.jpg" alt="" />
+              <div class="content">
+                <p class="time-text">22-12-2023</p>
+                <p class="name-text">
+                  Thuê xe ô tô tự lái: Tự do trải nghiệm lễ Giáng sinh đáng
+                  nhớ
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="container">
+      <div class="footer-row one">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="./assets/images/logoFooter.png" alt="" />
+          </div>
+          <div class="row">
+            <span>1900 0000</span>
+            <p>Tổng đài hỗ trợ: 7AM - 10PM</p>
+          </div>
+          <div class="row">
+            <span>contactrentalcar@gmail.com</span>
+            <p>Gửi mail cho RENTALCAR</p>
+          </div>
+          <div class="footer-contact">
+            <!--Facebook-->
+            <a class="wrap-svg" target="_blank" href="#"><svg width="24" height="24"
+                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.94 21.2501V14.1601H9.5V11.4301H11.94V9.43012C11.94 8.31012 12.22 7.47012 12.86 6.83012C13.5 6.19012 14.34 5.87012 15.42 5.87012C16.22 5.87012 16.94 5.91012 17.5 5.99012V8.39012H16.06C15.54 8.39012 15.18 8.51012 14.98 8.75012C14.82 8.99012 14.74 9.31012 14.74 9.71012V11.4301H17.51L17.15 14.1601H14.75V21.2501"
+                  stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path
+                  d="M17.14 21.25H6.86C4.59 21.25 2.75 19.41 2.75 17.14V6.86C2.75 4.59 4.59 2.75 6.86 2.75H17.14C19.41 2.75 21.25 4.59 21.25 6.86V17.14C21.25 19.41 19.41 21.25 17.14 21.25Z"
+                  stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <!--TikTok-->
+              </svg></a><a class="wrap-svg" target="_blank" href="#"><svg width="24"
+                height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M9.75999 12.69C8.27999 12.69 7.04999 13.92 7.04999 15.4C7.04999 16.88 8.27999 18.11 9.75999 18.11C11.24 18.11 12.47 16.88 12.47 15.4V2.75H15.65C15.65 2.79 15.65 2.79 15.65 2.82C15.65 3.07 15.65 3.33 15.72 3.58C15.94 4.77 16.66 5.82 17.67 6.47C18.36 6.94 19.19 7.19 20.05 7.19C20.05 7.19 20.05 7.19 20.09 7.19V10.33H20.05C18.39 10.33 16.87 9.82 15.64 8.92V15.39C15.64 18.64 13 21.24 9.74999 21.24C6.49999 21.24 3.89999 18.64 3.89999 15.39C3.89999 12.14 6.49999 9.5 9.74999 9.5V12.69H9.75999Z"
+                  stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <!--Zalo-->
+              </svg></a><a class="wrap-svg" target="_blank" href="#"><svg width="24"
+                height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="path-1-outside-1_6394_301594" maskUnits="userSpaceOnUse" x="0.919998" y="0.919922" width="22"
+                  height="22" fill="black">
+                  <rect fill="white" x="0.919998" y="0.919922" width="22" height="22"></rect>
+                  <path
+                    d="M4.32 1.91992C3.00023 1.91992 1.92 3.00015 1.92 4.31992V19.6799C1.92 20.9997 3.00023 22.0799 4.32 22.0799H19.68C20.999822.0799 22.08 20.9997 22.08 19.6799V4.31992C22.08 3.00015 20.9998 1.91992 19.68 1.91992H4.32ZM4.32 2.87992H7.47656C5.81666 4.60701 4.8 6.87526 4.8 9.35992C4.8 11.9334 5.88871 14.2792 7.65562 16.0265C7.5914 15.9653 7.67454 16.0717 7.68281 16.2599C7.69134 16.4542 7.66209 16.7212 7.58344 16.9855C7.42613 17.5143 7.09711 18.0017 6.56812 18.178C6.46765 18.2115 6.38107 18.2773 6.32187 18.3651C6.26266 18.4529 6.23416 18.5578 6.24079 18.6635C6.24742 18.7692 6.28882 18.8698 6.35854 18.9495C6.42826 19.0292 6.52238 19.0836 6.62625 19.1043C7.95091 19.3692 8.8879 18.9704 9.57844 18.6534C10.269 18.3363 10.6421 18.123 11.34 18.4049L11.3456 18.4068C12.6523 18.9176 14.091 19.1999 15.6 19.1999C17.6147 19.1999 19.503 18.6965 21.12 17.819V19.6799C21.12 20.4808 20.4809 21.1199 19.68 21.1199H4.32C3.51913 21.1199 2.88 20.4808 2.88 19.6799V4.31992C2.88 3.51905 3.51913 2.87992 4.32 2.87992ZM8.87812 2.87992H19.68C20.4809 2.87992 21.12 3.51905 21.12 4.31992V16.7062C19.5489 17.67 17.6518 18.2399 15.6 18.2399C14.2129 18.2399 12.8945 17.9804 11.7 17.5143C10.6857 17.1046 9.85955 17.4677 9.17812 17.7805C8.80908 17.95 8.44498 18.0908 8.03344 18.1687C8.23704 17.8784 8.4112 17.5683 8.50312 17.2593C8.61173 16.8942 8.65588 16.5367 8.64187 16.2177C8.62791 15.8998 8.60013 15.6087 8.33156 15.3449L8.33062 15.344C6.72812 13.7593 5.76 11.6633 5.76 9.35992C5.76 6.80508 6.95336 4.50598 8.87812 2.87992ZM15.8325 7.19336C15.7054 7.19535 15.5842 7.2477 15.4956 7.33892C15.407 7.43014 15.3583 7.55278 15.36 7.67992V11.9999C15.3591 12.0635 15.3708 12.1267 15.3946 12.1857C15.4183 12.2447 15.4535 12.2984 15.4982 12.3437C15.5428 12.389 15.596 12.425 15.6547 12.4496C15.7134 12.4741 15.7764 12.4868 15.84 12.4868C15.9036 12.4868 15.9666 12.4741 16.0253 12.4496C16.084 12.425 16.1372 12.389 16.1818 12.3437C16.2265 12.2984 16.2617 12.2447 16.2854 12.1857C16.3091 12.1267 16.3209 12.0635 16.32 11.9999V7.67992C16.3209 7.6157 16.3089 7.55196 16.2847 7.49247C16.2605 7.43298 16.2246 7.37895 16.1791 7.33358C16.1337 7.28821 16.0796 7.25242 16.02 7.22833C15.9605 7.20425 15.8967 7.19236 15.8325 7.19336ZM8.64 7.67992C8.57639 7.67902 8.51324 7.69077 8.45422 7.71449C8.39519 7.73821 8.34147 7.77342 8.29617 7.81808C8.25088 7.86275 8.21491 7.91597 8.19036 7.97465C8.1658 8.03333 8.15316 8.09631 8.15316 8.15992C8.15316 8.22353 8.1658 8.28651 8.19036 8.3452C8.21491 8.40388 8.25088 8.4571 8.29617 8.50176C8.34147 8.54642 8.39519 8.58163 8.45422 8.60535C8.51324 8.62907 8.57639 8.64082 8.64 8.63992H10.1747L8.23312 11.7459C8.18782 11.8185 8.16277 11.9019 8.16057 11.9875C8.15837 12.0731 8.17909 12.1577 8.22059 12.2326C8.2621 12.3075 8.32287 12.3699 8.39661 12.4134C8.47036 12.4569 8.55439 12.4798 8.64 12.4799H11.04C11.1036 12.4808 11.1668 12.4691 11.2258 12.4454C11.2848 12.4216 11.3385 12.3864 11.3838 12.3418C11.4291 12.2971 11.4651 12.2439 11.4896 12.1852C11.5142 12.1265 11.5268 12.0635 11.5268 11.9999C11.5268 11.9363 11.5142 11.8733 11.4896 11.8146C11.4651 11.756 11.4291 11.7027 11.3838 11.6581C11.3385 11.6134 11.2848 11.5782 11.2258 11.5545C11.1668 11.5308 11.1036 11.519 11.04 11.5199H9.50531L11.4469 8.41398C11.4922 8.34134 11.5172 8.25791 11.5194 8.17232C11.5216 8.08674 11.5009 8.00213 11.4594 7.92725C11.4179 7.85237 11.3571 7.78995 11.2834 7.74647C11.2096 7.70298 11.1256 7.68 11.04 7.67992H8.64ZM14.3925 9.11336C14.3138 9.11475 14.2366 9.13549 14.1677 9.17374C14.0989 9.212 14.0406 9.2666 13.9978 9.33273C13.759 9.20158 13.4897 9.11992 13.2 9.11992C12.2778 9.11992 11.52 9.87777 11.52 10.7999C11.52 11.7221 12.2778 12.4799 13.2 12.4799C13.4894 12.4799 13.7582 12.398 13.9969 12.2671C14.0534 12.3546 14.1369 12.4213 14.2347 12.4572C14.3325 12.493 14.4393 12.4961 14.539 12.4659C14.6387 12.4358 14.7259 12.374 14.7874 12.2899C14.8489 12.2059 14.8814 12.1041 14.88 11.9999V10.7999V9.59992C14.8809 9.5357 14.8689 9.47196 14.8447 9.41247C14.8205 9.35298 14.7846 9.29895 14.7391 9.25358C14.6937 9.20821 14.6396 9.17242 14.58 9.14833C14.5205 9.12425 14.4567 9.11236 14.3925 9.11336ZM18.48 9.11992C17.5578 9.11992 16.8 9.87777 16.8 10.7999C16.8 11.7221 17.5578 12.4799 18.48 12.4799C19.4022 12.4799 20.16 11.7221 20.16 10.7999C20.16 9.87777 19.4022 9.11992 18.48 9.11992ZM13.2 10.0799C13.6033 10.0799 13.92 10.3966 13.92 10.7999C13.92 11.2033 13.6033 11.5199 13.2 11.5199C12.7967 11.5199 12.48 11.2033 12.48 10.7999C12.48 10.3966 12.7967 10.0799 13.2 10.0799ZM18.48 10.0799C18.8833 10.0799 19.2 10.3966 19.2 10.7999C19.2 11.2033 18.8833 11.5199 18.48 11.5199C18.0767 11.5199 17.76 11.2033 17.76 10.7999C17.76 10.3966 18.0767 10.0799 18.48 10.0799Z">
+                  </path>
+                </mask>
+                <path
+                  d="M4.32 1.91992C3.00023 1.91992 1.92 3.00015 1.92 4.31992V19.6799C1.92 20.9997 3.00023 22.0799 4.32 22.0799H19.68C20.9998 22.0799 22.08 20.9997 22.08 19.6799V4.31992C22.08 3.00015 20.9998 1.91992 19.68 1.91992H4.32ZM4.32 2.87992H7.47656C5.81666 4.60701 4.8 6.87526 4.8 9.35992C4.8 11.9334 5.88871 14.2792 7.65562 16.0265C7.5914 15.9653 7.67454 16.0717 7.68281 16.2599C7.69134 16.4542 7.66209 16.7212 7.58344 16.9855C7.42613 17.5143 7.09711 18.0017 6.56812 18.178C6.46765 18.2115 6.38107 18.2773 6.32187 18.3651C6.26266 18.4529 6.23416 18.5578 6.24079 18.6635C6.24742 18.7692 6.28882 18.8698 6.35854 18.9495C6.42826 19.0292 6.52238 19.0836 6.62625 19.1043C7.95091 19.3692 8.8879 18.9704 9.57844 18.6534C10.269 18.3363 10.6421 18.123 11.34 18.4049L11.3456 18.4068C12.6523 18.9176 14.091 19.1999 15.6 19.1999C17.6147 19.1999 19.503 18.6965 21.12 17.819V19.6799C21.12 20.4808 20.4809 21.1199 19.68 21.1199H4.32C3.51913 21.1199 2.88 20.4808 2.88 19.6799V4.31992C2.88 3.51905 3.51913 2.87992 4.32 2.87992ZM8.87812 2.87992H19.68C20.4809 2.87992 21.12 3.51905 21.12 4.31992V16.7062C19.5489 17.67 17.6518 18.2399 15.6 18.2399C14.2129 18.2399 12.8945 17.9804 11.7 17.5143C10.6857 17.1046 9.85955 17.4677 9.17812 17.7805C8.80908 17.95 8.44498 18.0908 8.03344 18.1687C8.23704 17.8784 8.4112 17.5683 8.50312 17.2593C8.61173 16.8942 8.65588 16.5367 8.64187 16.2177C8.62791 15.8998 8.60013 15.6087 8.33156 15.3449L8.33062 15.344C6.72812 13.7593 5.76 11.6633 5.76 9.35992C5.76 6.80508 6.95336 4.50598 8.87812 2.87992ZM15.8325 7.19336C15.7054 7.19535 15.5842 7.2477 15.4956 7.33892C15.407 7.43014 15.3583 7.55278 15.36 7.67992V11.9999C15.3591 12.0635 15.3708 12.1267 15.3946 12.1857C15.4183 12.2447 15.4535 12.2984 15.4982 12.3437C15.5428 12.389 15.596 12.425 15.6547 12.4496C15.7134 12.4741 15.7764 12.4868 15.84 12.4868C15.9036 12.4868 15.9666 12.4741 16.0253 12.4496C16.084 12.425 16.1372 12.389 16.1818 12.3437C16.2265 12.2984 16.2617 12.2447 16.2854 12.1857C16.3091 12.1267 16.3209 12.0635 16.32 11.9999V7.67992C16.3209 7.6157 16.3089 7.55196 16.2847 7.49247C16.2605 7.43298 16.2246 7.37895 16.1791 7.33358C16.1337 7.28821 16.0796 7.25242 16.02 7.22833C15.9605 7.20425 15.8967 7.19236 15.8325 7.19336ZM8.64 7.67992C8.57639 7.67902 8.51324 7.69077 8.45422 7.71449C8.39519 7.73821 8.34147 7.77342 8.29617 7.81808C8.25088 7.86275 8.21491 7.91597 8.19036 7.97465C8.1658 8.03333 8.15316 8.09631 8.15316 8.15992C8.15316 8.22353 8.1658 8.28651 8.19036 8.3452C8.21491 8.40388 8.25088 8.4571 8.29617 8.50176C8.34147 8.54642 8.39519 8.58163 8.45422 8.60535C8.51324 8.62907 8.57639 8.64082 8.64 8.63992H10.1747L8.23312 11.7459C8.18782 11.8185 8.16277 11.9019 8.16057 11.9875C8.15837 12.0731 8.17909 12.1577 8.22059 12.2326C8.2621 12.3075 8.32287 12.3699 8.39661 12.4134C8.47036 12.4569 8.55439 12.4798 8.64 12.4799H11.04C11.1036 12.4808 11.1668 12.4691 11.2258 12.4454C11.2848 12.4216 11.3385 12.3864 11.3838 12.3418C11.4291 12.2971 11.4651 12.2439 11.4896 12.1852C11.5142 12.1265 11.5268 12.0635 11.5268 11.9999C11.5268 11.9363 11.5142 11.8733 11.4896 11.8146C11.4651 11.756 11.4291 11.7027 11.3838 11.6581C11.3385 11.6134 11.2848 11.5782 11.2258 11.5545C11.1668 11.5308 11.1036 11.519 11.04 11.5199H9.50531L11.4469 8.41398C11.4922 8.34134 11.5172 8.25791 11.5194 8.17232C11.5216 8.08674 11.5009 8.00213 11.4594 7.92725C11.4179 7.85237 11.3571 7.78995 11.2834 7.74647C11.2096 7.70298 11.1256 7.68 11.04 7.67992H8.64ZM14.3925 9.11336C14.3138 9.11475 14.2366 9.13549 14.1677 9.17374C14.0989 9.212 14.0406 9.2666 13.9978 9.33273C13.759 9.20158 13.4897 9.11992 13.2 9.11992C12.2778 9.11992 11.52 9.87777 11.52 10.7999C11.52 11.7221 12.2778 12.4799 13.2 12.4799C13.4894 12.4799 13.7582 12.398 13.9969 12.2671C14.0534 12.3546 14.1369 12.4213 14.2347 12.4572C14.3325 12.493 14.4393 12.4961 14.539 12.4659C14.6387 12.4358 14.7259 12.374 14.7874 12.2899C14.8489 12.2059 14.8814 12.1041 14.88 11.9999V10.7999V9.59992C14.8809 9.5357 14.8689 9.47196 14.8447 9.41247C14.8205 9.35298 14.7846 9.29895 14.7391 9.25358C14.6937 9.20821 14.6396 9.17242 14.58 9.14833C14.5205 9.12425 14.4567 9.11236 14.3925 9.11336ZM18.48 9.11992C17.5578 9.11992 16.8 9.87777 16.8 10.7999C16.8 11.7221 17.5578 12.4799 18.48 12.4799C19.4022 12.4799 20.16 11.7221 20.16 10.7999C20.16 9.87777 19.4022 9.11992 18.48 9.11992ZM13.2 10.0799C13.6033 10.0799 13.92 10.3966 13.92 10.7999C13.92 11.2033 13.6033 11.5199 13.2 11.5199C12.7967 11.5199 12.48 11.2033 12.48 10.7999C12.48 10.3966 12.7967 10.0799 13.2 10.0799ZM18.48 10.0799C18.8833 10.0799 19.2 10.3966 19.2 10.7999C19.2 11.2033 18.8833 11.5199 18.48 11.5199C18.0767 11.5199 17.76 11.2033 17.76 10.7999C17.76 10.3966 18.0767 10.0799 18.48 10.0799Z">
+                  </path>
+                <path
+                  d="M4.32 1.91992C3.00023 1.91992 1.92 3.00015 1.92 4.31992V19.6799C1.92 20.9997 3.00023 22.0799 4.32 22.0799H19.68C20.9998 22.0799 22.08 20.9997 22.08 19.6799V4.31992C22.08 3.00015 20.9998 1.91992 19.68 1.91992H4.32ZM4.32 2.87992H7.47656C5.81666 4.60701 4.8 6.87526 4.8 9.35992C4.8 11.9334 5.88871 14.2792 7.65562 16.0265C7.5914 15.9653 7.67454 16.0717 7.68281 16.2599C7.69134 16.4542 7.66209 16.7212 7.58344 16.9855C7.42613 17.5143 7.09711 18.0017 6.56812 18.178C6.46765 18.2115 6.38107 18.2773 6.32187 18.3651C6.26266 18.4529 6.23416 18.5578 6.24079 18.6635C6.24742 18.7692 6.28882 18.8698 6.35854 18.9495C6.42826 19.0292 6.52238 19.0836 6.62625 19.1043C7.95091 19.3692 8.8879 18.9704 9.57844 18.6534C10.269 18.3363 10.6421 18.123 11.34 18.4049L11.3456 18.4068C12.6523 18.9176 14.091 19.1999 15.6 19.1999C17.6147 19.1999 19.503 18.6965 21.12 17.819V19.6799C21.12 20.4808 20.4809 21.1199 19.68 21.1199H4.32C3.51913 21.1199 2.88 20.4808 2.88 19.6799V4.31992C2.88 3.51905 3.51913 2.87992 4.32 2.87992ZM8.87812 2.87992H19.68C20.4809 2.87992 21.12 3.51905 21.12 4.31992V16.7062C19.5489 17.67 17.6518 18.2399 15.6 18.2399C14.2129 18.2399 12.8945 17.9804 11.7 17.5143C10.6857 17.1046 9.85955 17.4677 9.17812 17.7805C8.80908 17.95 8.44498 18.0908 8.03344 18.1687C8.23704 17.8784 8.4112 17.5683 8.50312 17.2593C8.61173 16.8942 8.65588 16.5367 8.64187 16.2177C8.62791 15.8998 8.60013 15.6087 8.33156 15.3449L8.33062 15.344C6.72812 13.7593 5.76 11.6633 5.76 9.35992C5.76 6.80508 6.95336 4.50598 8.87812 2.87992ZM15.8325 7.19336C15.7054 7.19535 15.5842 7.2477 15.4956 7.33892C15.407 7.43014 15.3583 7.55278 15.36 7.67992V11.9999C15.3591 12.0635 15.3708 12.1267 15.3946 12.1857C15.4183 12.2447 15.4535 12.2984 15.4982 12.3437C15.5428 12.389 15.596 12.425 15.6547 12.4496C15.7134 12.4741 15.7764 12.4868 15.84 12.4868C15.9036 12.4868 15.9666 12.4741 16.0253 12.4496C16.084 12.425 16.1372 12.389 16.1818 12.3437C16.2265 12.2984 16.2617 12.2447 16.2854 12.1857C16.3091 12.1267 16.3209 12.0635 16.32 11.9999V7.67992C16.3209 7.6157 16.3089 7.55196 16.2847 7.49247C16.2605 7.43298 16.2246 7.37895 16.1791 7.33358C16.1337 7.28821 16.0796 7.25242 16.02 7.22833C15.9605 7.20425 15.8967 7.19236 15.8325 7.19336ZM8.64 7.67992C8.57639 7.67902 8.51324 7.69077 8.45422 7.71449C8.39519 7.73821 8.34147 7.77342 8.29617 7.81808C8.25088 7.86275 8.21491 7.91597 8.19036 7.97465C8.1658 8.03333 8.15316 8.09631 8.15316 8.15992C8.15316 8.22353 8.1658 8.28651 8.19036 8.3452C8.21491 8.40388 8.25088 8.4571 8.29617 8.50176C8.34147 8.54642 8.39519 8.58163 8.45422 8.60535C8.51324 8.62907 8.57639 8.64082 8.64 8.63992H10.1747L8.23312 11.7459C8.18782 11.8185 8.16277 11.9019 8.16057 11.9875C8.15837 12.0731 8.17909 12.1577 8.22059 12.2326C8.2621 12.3075 8.32287 12.3699 8.39661 12.4134C8.47036 12.4569 8.55439 12.4798 8.64 12.4799H11.04C11.1036 12.4808 11.1668 12.4691 11.2258 12.4454C11.2848 12.4216 11.3385 12.3864 11.3838 12.3418C11.4291 12.2971 11.4651 12.2439 11.4896 12.1852C11.5142 12.1265 11.5268 12.0635 11.5268 11.9999C11.5268 11.9363 11.5142 11.8733 11.4896 11.8146C11.4651 11.756 11.4291 11.7027 11.3838 11.6581C11.3385 11.6134 11.2848 11.5782 11.2258 11.5545C11.1668 11.5308 11.1036 11.519 11.04 11.5199H9.50531L11.4469 8.41398C11.4922 8.34134 11.5172 8.25791 11.5194 8.17232C11.5216 8.08674 11.5009 8.00213 11.4594 7.92725C11.4179 7.85237 11.3571 7.78995 11.2834 7.74647C11.2096 7.70298 11.1256 7.68 11.04 7.67992H8.64ZM14.3925 9.11336C14.3138 9.11475 14.2366 9.13549 14.1677 9.17374C14.0989 9.212 14.0406 9.2666 13.9978 9.33273C13.759 9.20158 13.4897 9.11992 13.2 9.11992C12.2778 9.11992 11.52 9.87777 11.52 10.7999C11.52 11.7221 12.2778 12.4799 13.2 12.4799C13.4894 12.4799 13.7582 12.398 13.9969 12.2671C14.0534 12.3546 14.1369 12.4213 14.2347 12.4572C14.3325 12.493 14.4393 12.4961 14.539 12.4659C14.6387 12.4358 14.7259 12.374 14.7874 12.2899C14.8489 12.2059 14.8814 12.1041 14.88 11.9999V10.7999V9.59992C14.8809 9.5357 14.8689 9.47196 14.8447 9.41247C14.8205 9.35298 14.7846 9.29895 14.7391 9.25358C14.6937 9.20821 14.6396 9.17242 14.58 9.14833C14.5205 9.12425 14.4567 9.11236 14.3925 9.11336ZM18.48 9.11992C17.5578 9.11992 16.8 9.87777 16.8 10.7999C16.8 11.7221 17.5578 12.4799 18.48 12.4799C19.4022 12.4799 20.16 11.7221 20.16 10.7999C20.16 9.87777 19.4022 9.11992 18.48 9.11992ZM13.2 10.0799C13.6033 10.0799 13.92 10.3966 13.92 10.7999C13.92 11.2033 13.6033 11.5199 13.2 11.5199C12.7967 11.5199 12.48 11.2033 12.48 10.7999C12.48 10.3966 12.7967 10.0799 13.2 10.0799ZM18.48 10.0799C18.8833 10.0799 19.2 10.3966 19.2 10.7999C19.2 11.2033 18.8833 11.5199 18.48 11.5199C18.0767 11.5199 17.76 11.2033 17.76 10.7999C17.76 10.3966 18.0767 10.0799 18.48 10.0799Z"
+                  stroke="black" stroke-width="0.2" mask="url(#path-1-outside-1_6394_301594)"></path>
+              </svg>
+              ></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Chính sách</h3>
+          <ul>
+            <li><a href="#!">Chính sách và quy định</a></li>
+            <li><a href="#!">Quy chế hoạt động</a></li>
+            <li><a href="#!">Bảo mật thông tin</a></li>
+            <li><a href="#!">Giải quyết tranh chấp</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Tìm hiểu thêm</h3>
+          <ul>
+            <li><a href="#!">Hướng dẫn chung</a></li>
+            <li><a href="#!">Hướng dẫn đặt xe</a></li>
+            <li><a href="#!">Hướng dẫn thanh toán</a></li>
+            <li><a href="#!">Hỏi và trả lời</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul class="none">
+            <li><a href="#!">Về RENTALCAR</a></li>
+            <li><a href="#!">RENTALCAR Blog</a></li>
+            <li><a href="#!">Tuyển dụng</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Đối Tác</h3>
+          <ul>
+            <li><a href="#!">Đăng ký chủ xe RENTALCAR</a></li>
+            <li><a href="#!">Đăng ký cho thuê xe dài hạn RENTALCAR</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Search-option-->
+ 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/i18n/jquery-ui-i18n.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+  <script src="./assets/js/Search-option.js"></script>
+  <script src="./assets/js/rental-form.js"></script>
+  <!-- Ion-Icon -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./assets/js/swiper.js"></script>
+</body>
+
+</html>
