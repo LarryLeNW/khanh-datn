@@ -11,10 +11,11 @@
 <link rel="stylesheet" href="/assets/css/responsive.css" />
 <link rel="stylesheet" href="/assets/css/car-details.css" />
 
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Search-option-->
+	rel="stylesheet"/>
+
 
 <title>Chi Tiết Ô Tô</title>
 </head>
@@ -890,7 +891,7 @@ function calculateRentalRate(dailyRate, percentDiscount, hours) {
   }
 }
 
-// Cập nhật giá thuê
+// Cập nhật gi�� thuê
 function updateRentalRate() {
   const hours = parseFloat(hoursElement.textContent) || 0;
   const rentalRate = calculateRentalRate(carDailyRate, carPercentDiscount, hours); 
@@ -1134,7 +1135,7 @@ updateRentalRate();
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
-											<div class="modal-body">
+											<div class="modal-body">	
 												<div id="promoCodesList">
 													<!-- Danh sách mã giảm giá sẽ được thêm vào đây -->
 												</div>
@@ -1180,10 +1181,10 @@ updateRentalRate();
 							<!-- Modal -->
 							<div class="modal fade" id="rentModal" tabindex="-1"
 								aria-labelledby="rentModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-lg">
+								<div class="modal-dialog modal-lg" style="max-width: 800px;">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h2 class="modal-title" id="rentModalLabel">Thông tin
+											<h2 class="modal-title" id="rentModalLabel" style="font-size: 24px;">Thông tin
 												thuê xe</h2>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1191,108 +1192,112 @@ updateRentalRate();
 										<div class="modal-body">
 											<br>
 											<div class="row">
-												<div class="col-md-8 left-align-info">
-													<p>
-														<strong>Họ Tên:</strong> <span
-															th:text="${loggedAcc != null && loggedAcc.fullName != null && loggedAcc.fullName != '' ? loggedAcc.fullName : 'Chưa có tên'}"
-															id="fullName"></span>
-													</p>
-													<p>
-														<strong>SĐT:</strong> <span
-															th:text="${loggedAcc != null && loggedAcc.phoneNumber != null && loggedAcc.phoneNumber != '' ? loggedAcc.phoneNumber : 'Chưa có số điện thoại'}"
-															id="sdt"></span>
-													</p>
-													<p>
-														<strong>Thời gian nhận xe:</strong> <span id="pickupTime"></span>
-													</p>
-													<p>
-														<strong>Thời gian trả xe:</strong> <span id="returnTime"></span>
-													</p>
-													<p>
-														<strong>Tổng số giờ thuê:</strong> <span id="rentalHours"></span>
-													</p>
-													<p>
-														<strong>Địa chỉ:</strong> <span id="rentalAddress"></span>
-													</p>
-													<p>
-														<strong>Mã giảm giá:</strong> <span id="promoCode"></span>
-													</p>
-													<p>
-														<span id="notes">Ghi Chú</span><br />
-														<textarea id="rental-notes" name="rental-notes" rows="6"
-															style="width: 70%; resize: vertical;"
-															placeholder="Nhập nội dung.."></textarea>
-													</p>
-													<br>
-													<hr>
-													<p>
-														<strong>Tổng thanh toán: </strong> <span value="0"
-															id="finalRentRate" class="float-end text-danger fw-bold"></span>
-													</p>
+												<div class="col-md-8">
+													<div class="card mb-3"  style="border-radius: 10px;">
+														<div class="card-body text-start">
+															<h5 class="card-title text-center" style="font-size: 23px;"> <Strong>Thông tin cá nhân</Strong></h5>
+															<p class="card-text" style="font-size: 18px;">
+																<span>Họ Tên:</span> <strong
+																	th:text="${loggedAcc != null && loggedAcc.fullName != null && loggedAcc.fullName != '' ? loggedAcc.fullName : 'Chưa có tên'}"
+																	id="fullName"></strong>
+															</p>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>SĐT:</span> <strong
+																	th:text="${loggedAcc != null && loggedAcc.phoneNumber != null && loggedAcc.phoneNumber != '' ? loggedAcc.phoneNumber : 'Chưa có số điện thoại'}"
+																	id="sdt"></strong>
+															</p>
+														</div>
+													</div>
 
-													</p>
+													<div class="card mb-3"  style="border-radius: 10px;">
+														<div class="card-body text-start">
+															<h5 class="card-title text-center" style="font-size: 23px;"><strong>Thông tin thuê xe</strong></h5>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Thời gian nhận xe:</span> <strong id="pickupTime"></strong>
+															</p>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Thời gian trả xe:</span> <strong id="returnTime"></strong>
+															</p>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Tổng số giờ thuê:</span> <strong id="rentalHours"></strong>
+															</p>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Địa chỉ:</span> <strong id="rentalAddress"></strong>
+															</p>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Mã giảm giá:</span> <strong id="promoCode"></strong>
+															</p>
+														</div>
+													</div>
+
+													<div class="card mb-3"  style="border-radius: 10px;">
+														<div class="card-body text-start">
+															<h5 class="card-title text-center" style="font-size: 23px;"><strong>Ghi chú</strong></h5>
+															<textarea id="rental-notes" name="rental-notes" rows="6"
+																style="width: 100%; resize: vertical; border-radius: 5px;"
+																></textarea>
+														</div>
+													</div>
+
+													<div class="card mb-3"  style="border-radius: 10px;">
+														<div class="card-body text-start">
+															<h5 class="card-title text-center" style="font-size: 23px;"><strong>Thanh Toán</strong></h5>
+															<p class="card-text" style="font-size: 18px;"> 
+																<span>Tổng thanh toán:</span> <span value="0"
+																	id="finalRentRate" class="text-danger fw-bold"></span>
+															</p>
+														</div>
+													</div>
 												</div>
 
 												<div class="col-md-4 text-center">
-													<label>Hình thức thanh toán:</label> <br>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio"
-															name="paymentOption" id="postpay" value="postpay" checked>
-														<label class="form-check-label" for="postpay">Trả
-															trước</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio"
-															name="paymentOption" id="prepay" value="prepay">
-														<label class="form-check-label" for="prepay">Trả
-															sau</label>
-													</div>
-													<br> <br>
+													<div class="card mb-3"  style="border-radius: 10px;">
+														<div class="card-body text-start">
+															<h5 class="card-title" style="font-size: 20px;"><strong>Hình thức thanh toán</strong></h5>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="paymentOption" id="postpay" value="postpay" checked>
+																<label class="form-check-label" for="postpay">Trả
+																	trước</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="paymentOption" id="prepay" value="prepay">
+																<label class="form-check-label" for="prepay">Trả
+																	sau</label>
+															</div>
+															<br><br>
 
-													<div id="prepay-panel" style="display: none">
-														<h1>đây là nội dung trả sau</h1>
+															<div id="prepay-panel" style="display: none">
+																<h6>Đây là nội dung trả sau</h6>
+															</div>
 
-													</div>
+															<div id="payment-type-panel">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="paymentType" id="cod-payment" value="COD" checked>
+																	<label class="form-check-label" for="cod-payment">Thanh
+																		toán tiền mặt trước</label>
+																</div>
 
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="paymentType" id="online-payment" value="ONLINE">
+																	<label class="form-check-label" for="online-payment">Thanh
+																		toán Online</label>
+																</div>
+															</div>
 
+															<br><br>
 
-													<div id="payment-type-panel">
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="paymentType" id="cod-payment" value="COD" checked>
-															<label class="form-check-label" for="cod-payment">Thanh
-																toán tiền mặt trước</label>
+															<div id="postpayMessage" style="display: none;">
+																<p class="text-warning">Lưu ý: Bạn sẽ thanh toán sau
+																	khi trả xe. Hãy chắc chắn rằng bạn đã hoàn tất việc trả
+																	xe đúng giờ.</p>
+															</div>
 														</div>
-
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="paymentType" id="online-payment" value="ONLINE">
-															<label class="form-check-label" for="online-payment">Thanh
-																toán Online</label>
-														</div>
 													</div>
-
-
-
-
-													<br> <br>
-
-
-													<div id="postpayMessage" style="display: none;">
-														<p class="text-warning">Lưu ý: Bạn sẽ thanh toán sau
-															khi trả xe. Hãy chắc chắn rằng bạn đã hoàn tất việc trả
-															xe đúng giờ.</p>
-													</div>
-
-													<!-- 	    <div class="qr-code-container border p-3" style="border-radius: 5px;">
-					        <img id="qrImage" src="${qrImageUrl}" alt="Mã QR" class="img-fluid mb-3" />
-					        <hr>
-					        <br>
-					        <p class="text-muted fs-5">Ghi Chú:</p>
-					        <p id="qrText" class="text-muted fs-6"></p> 
-					    </div> -->
 												</div>
-
 											</div>
 										</div>
 										<div class="modal-footer">
@@ -1777,30 +1782,20 @@ paymentResult.message.includes("https://")
 			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 		<script nomodule
 			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-		<!-- jQuery -->
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-		<!-- Bootstrap JS và Popper.js -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-
-		<!-- Flatpickr -->
-		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 		<!-- Swiper.js library -->
-		<script
+		<script 
 			src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-		<!-- Custom Swiper JS -->
-		<script src="/assets/js/swiper.js"></script>
-		<!-- Search option JS -->
-		<script src="/assets/js/Search-option.js"></script>
-		<!-- Car-details -->
-		<script th:inline="javascript" src="/assets/js/car-detail.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-		//
+		<script 
+			th:inline="javascript" src="/assets/js/car-detail.js"></script>
+		<script 
+			src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+			
 	</div>
 </body>
 </html>

@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.rentalcar.util.*;
+
+import jakarta.xml.bind.DatatypeConverter;
+
 import com.rentalcar.dao.PaymentRepo;
 import com.rentalcar.entity.Account;
 import com.rentalcar.entity.Discount;
@@ -43,12 +45,23 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TimeZone;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {
 
 	@Autowired
 	private PaymentRepo paymentRepo;
+
+	private Mac HmacSHA256;
+
+	public PaymentController() throws Exception {
+		HmacSHA256 = Mac.getInstance("HmacSHA256");
+		HmacSHA256.init(new SecretKeySpec(stage_zalo_config.get("key2").getBytes(), "HmacSHA256"));
+	}
+	
 
 	private static Map<String, String> stage_zalo_config = new HashMap<String, String>() {
 		{
@@ -66,7 +79,7 @@ public class PaymentController {
 		return fmt.format(cal.getTimeInMillis());
 	}
 
-	static String createUrlPayment(double totalAmount, String app_trans_id) throws IOException {
+	static String createUrlPayment(double totalAmount, String idQrCode, String app_trans_id) throws IOException {
 
 		Map<String, Object>[] item = new Map[] { new HashMap<>() {
 			{
@@ -79,7 +92,7 @@ public class PaymentController {
 
 		Map<String, Object> embed_data = new HashMap<>();
 		embed_data.put("merchantinfo", "Test Merchant");
-		embed_data.put("redirecturl", "http://localhost:3000/checkout/payment/success");
+		embed_data.put("redirecturl", "http://localhost:8080/success");
 
 		Map<String, Object> order = new HashMap<String, Object>() {
 			{
@@ -88,12 +101,12 @@ public class PaymentController {
 				put("app_trans_id", app_trans_id);
 				put("app_user", "datn");
 				put("amount", (int) totalAmount);
-				put("description", "Payment for the order - DATN DEV TEAM 2025 DEMO");
+				put("description",(String) idQrCode);
 				put("bank_code", "");
 				put("item", new JSONArray(Arrays.asList(item)).toString());
 				put("embed_data", new JSONObject(embed_data).toString());
 				put("callback_url",
-						"https://f5aa-2402-800-629c-f6b2-e84a-d4dd-8856-98bc.ngrok-free.app/api/payment/zalo/callback");
+						"https://09b3-2a09-bac5-d5cd-16d2-00-246-d2.ngrok-free.app/api/payment/zalo-pay/callback");
 			}
 		};
 
@@ -175,9 +188,9 @@ public class PaymentController {
 						.body(new PaymentResponse("Save payment successfully...", "success"));
 			}
 
-			payment.setStatus("unpaid");
+			payment.setStatus("unpaid");	
 			Payment savedPayment = paymentRepo.save(payment);
-			String url = createUrlPayment(payment.getAmount().doubleValue(), trans_id);
+			String url = createUrlPayment(payment.getAmount().doubleValue(), payment.getIdQrCode().toString(), trans_id);
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(new PaymentResponse(url, "success"));
 
@@ -185,6 +198,58 @@ public class PaymentController {
 			PaymentResponse response = new PaymentResponse("An error occurred while saving payment.", "error");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
+	}
+
+
+
+	@PostMapping("/zalo-pay/callback")
+	public String save(@RequestBody String dataCallback) {
+		System.out.println("đã đi vào callback dataCallback : " + dataCallback);
+		JSONObject result = new JSONObject();
+		try {
+			JSONObject cbdata = new JSONObject(dataCallback);
+			String dataStr = cbdata.getString("data");
+			String reqMac = cbdata.getString("mac");
+			System.out.println("mac : " + reqMac);
+
+
+			byte[] hashBytes = HmacSHA256.doFinal(dataStr.getBytes());
+			String mac = DatatypeConverter.printHexBinary(hashBytes).toLowerCase();
+
+			if (!reqMac.equals(mac)) {
+				result.put("return_code", -1);
+				result.put("return_message", "mac not equal");
+			} else {
+				System.out.println(" đúng địa chỉ mac ...");
+			
+			
+				
+				JSONObject data = new JSONObject(dataStr);
+				System.out.println(data.getString("app_trans_id"));
+				Optional<Payment> paymentFound = paymentRepo.findByTransId(data.getString("app_trans_id"));
+				paymentFound.ifPresent(payment -> {
+					payment.setStatus("success"); 
+					paymentRepo.save(payment);
+				});
+				
+
+				result.put("return_code", 1);
+				result.put("return_message", "success");
+				
+		         
+			}
+		} catch (Exception ex) {
+			System.out.println("" + ex.toString());
+			result.put("return_code", 0);
+			result.put("return_message", ex.getMessage());
+		}
+
+	
+
+		return result.toString();
+
+	
+
 	}
 
 	// Cập nhật
