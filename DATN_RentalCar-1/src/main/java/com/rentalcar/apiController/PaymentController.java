@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.rentalcar.util.*;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.bind.DatatypeConverter;
 
 import com.rentalcar.dao.PaymentRepo;
@@ -61,7 +63,41 @@ public class PaymentController {
 		HmacSHA256 = Mac.getInstance("HmacSHA256");
 		HmacSHA256.init(new SecretKeySpec(stage_zalo_config.get("key2").getBytes(), "HmacSHA256"));
 	}
-	
+
+	public static Map<String, String> getVNPayConfig() {
+		Map<String, String> vnpParamsMap = new HashMap<>();
+		vnpParamsMap.put("vnp_Version", "2.1.0");
+		vnpParamsMap.put("vnp_Command", "pay");
+		vnpParamsMap.put("vnp_TmnCode", "58X4B4HP");
+		vnpParamsMap.put("vnp_CurrCode", "VND");
+		vnpParamsMap.put("vnp_OrderInfo", "nội dung kkk");
+		vnpParamsMap.put("vnp_OrderType", "other");
+		vnpParamsMap.put("vnp_Locale", "vn");
+		vnpParamsMap.put("vnp_ReturnUrl", "http://localhost:8080/api/payment/vn-pay/callback");
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String vnpCreateDate = formatter.format(calendar.getTime());
+		vnpParamsMap.put("vnp_CreateDate", vnpCreateDate);
+		calendar.add(Calendar.MINUTE, 15);
+		String vnp_ExpireDate = formatter.format(calendar.getTime());
+		vnpParamsMap.put("vnp_ExpireDate", vnp_ExpireDate);
+		return vnpParamsMap;
+	}
+
+	public String createVnPayUrl(int d, HttpServletRequest request, String trans_id) {
+		Map<String, String> vnpParamsMap = getVNPayConfig();
+		long amount = d * 100L;
+		vnpParamsMap.put("vnp_Amount", String.valueOf(amount));
+		vnpParamsMap.put("vnp_TxnRef", trans_id);
+		vnpParamsMap.put("vnp_IpAddr", VNPayUtil.getIpAddress(request));
+		String queryUrl = VNPayUtil.getPaymentURL(vnpParamsMap, true);
+		String hashData = VNPayUtil.getPaymentURL(vnpParamsMap, false);
+		String vnpSecureHash = VNPayUtil.hmacSHA512("VRLDWNVWDNPCOEPBZUTWSEDQAGXJCNGZ", hashData);
+		queryUrl += "&vnp_SecureHash=" + vnpSecureHash;
+
+		String paymentUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html" + "?" + queryUrl;
+		return paymentUrl;
+	}
 
 	private static Map<String, String> stage_zalo_config = new HashMap<String, String>() {
 		{
@@ -79,7 +115,7 @@ public class PaymentController {
 		return fmt.format(cal.getTimeInMillis());
 	}
 
-	static String createUrlPayment(double totalAmount, String idQrCode, String app_trans_id) throws IOException {
+	static String createUrlPaymentZaloPay(double totalAmount, String idQrCode, String app_trans_id) throws IOException {
 
 		Map<String, Object>[] item = new Map[] { new HashMap<>() {
 			{
@@ -101,7 +137,7 @@ public class PaymentController {
 				put("app_trans_id", app_trans_id);
 				put("app_user", "datn");
 				put("amount", (int) totalAmount);
-				put("description",(String) idQrCode);
+				put("description", (String) idQrCode);
 				put("bank_code", "");
 				put("item", new JSONArray(Arrays.asList(item)).toString());
 				put("embed_data", new JSONObject(embed_data).toString());
@@ -173,7 +209,7 @@ public class PaymentController {
 	}
 
 	@PostMapping
-	public ResponseEntity<PaymentResponse> save(@RequestBody Payment payment) {
+	public ResponseEntity<PaymentResponse> save(@RequestBody Payment payment, HttpServletRequest request) {
 		try {
 
 			String trans_id = getCurrentTimeString("yyMMdd") + "_" + Integer.parseInt(Helpers.handleRandom(7));
@@ -188,9 +224,16 @@ public class PaymentController {
 						.body(new PaymentResponse("Save payment successfully...", "success"));
 			}
 
-			payment.setStatus("unpaid");	
+			payment.setStatus("unpaid");
 			Payment savedPayment = paymentRepo.save(payment);
-			String url = createUrlPayment(payment.getAmount().doubleValue(), payment.getIdQrCode().toString(), trans_id);
+			
+			String url = "";
+			if ("ZaloPay".equals(payment.getPaymentType()))
+				url = createUrlPaymentZaloPay(payment.getAmount().doubleValue(), payment.getIdQrCode().toString(),
+						trans_id);
+
+			if ("VNPay".equals(payment.getPaymentType()))
+				url = createVnPayUrl((int) payment.getAmount().doubleValue(), request, trans_id);
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(new PaymentResponse(url, "success"));
 
@@ -200,18 +243,34 @@ public class PaymentController {
 		}
 	}
 
+	
+	@GetMapping("/vn-pay/callback")
+	public void callbackVNPay(@RequestParam Map<String, String> params, HttpServletResponse response)
+			throws IOException {
+		String txnRef = params.get("vnp_TxnRef");
+		String paymentStatus = params.get("vnp_TransactionStatus");
 
+		if ("00".equals(paymentStatus)) {
+			
+			Optional<Payment> paymentFound = paymentRepo.findByTransId(txnRef);
+			paymentFound.ifPresent(payment -> {
+				payment.setStatus("success");
+				paymentRepo.save(payment);
+			});
+		} 
 
+		String redirectUrl = "http://localhost:8080/success?apptransid=" + txnRef;
+		response.sendRedirect(redirectUrl);
+	}
+	
 	@PostMapping("/zalo-pay/callback")
 	public String save(@RequestBody String dataCallback) {
-		System.out.println("đã đi vào callback dataCallback : " + dataCallback);
 		JSONObject result = new JSONObject();
 		try {
 			JSONObject cbdata = new JSONObject(dataCallback);
 			String dataStr = cbdata.getString("data");
 			String reqMac = cbdata.getString("mac");
 			System.out.println("mac : " + reqMac);
-
 
 			byte[] hashBytes = HmacSHA256.doFinal(dataStr.getBytes());
 			String mac = DatatypeConverter.printHexBinary(hashBytes).toLowerCase();
@@ -221,22 +280,18 @@ public class PaymentController {
 				result.put("return_message", "mac not equal");
 			} else {
 				System.out.println(" đúng địa chỉ mac ...");
-			
-			
-				
+
 				JSONObject data = new JSONObject(dataStr);
 				System.out.println(data.getString("app_trans_id"));
 				Optional<Payment> paymentFound = paymentRepo.findByTransId(data.getString("app_trans_id"));
 				paymentFound.ifPresent(payment -> {
-					payment.setStatus("success"); 
+					payment.setStatus("success");
 					paymentRepo.save(payment);
 				});
-				
 
 				result.put("return_code", 1);
 				result.put("return_message", "success");
-				
-		         
+
 			}
 		} catch (Exception ex) {
 			System.out.println("" + ex.toString());
@@ -244,11 +299,7 @@ public class PaymentController {
 			result.put("return_message", ex.getMessage());
 		}
 
-	
-
 		return result.toString();
-
-	
 
 	}
 
